@@ -16,8 +16,8 @@ minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "n
 
 # Site Settings
 locale                   : "ko-KR"
-title                    : "welcome to github", "백종성 포트폴리오"
-title_separator          : "|"
+title                    : "welcome to github"
+title_separator          : "-"
 subtitle                 : "Ajou University"
 name                     : "백종성"
 description              : "portfolio for BaekJongSeong"
@@ -26,8 +26,8 @@ baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "BaekJongSeong/BaekJongSeong.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : "/assets/images/ajou.png"
-masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
-# breadcrumbs            : false # true, false (default)
+masthead_title           : "변화의 울림 Blog"
+# breadcrumbs            : true # true, false (default)
 words_per_minute         : 200
 comments:
   provider               : # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
@@ -96,7 +96,7 @@ analytics:
 author:
   name             : "백종성"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Ajou media, Software"
+  bio              : "Ajou media, Software <br> student that constantly challenges and develops"
   location         : "Jeon-ju, Korea"
   email            : "jsbaek01@naver.com"
   links:
