@@ -12,12 +12,12 @@
 
 # theme                  : "minimal-mistakes-jekyll"
 # remote_theme           : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : "aqua" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "en-US"
-title                    : "백종성 포트폴리오"
-title_separator          : "-"
+locale                   : "ko-KR"
+title                    : "welcome to github", "백종성 포트폴리오"
+title_separator          : "|"
 subtitle                 : "Ajou University"
 name                     : "백종성"
 description              : "portfolio for BaekJongSeong"
