@@ -117,7 +117,7 @@ author:
       # url: "https://github.com/"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-       #url: "https://www.instagram.com/97___baek/"
+       url: "https://www.instagram.com/97___baek/"
 
 # Site Footer
 footer:
@@ -139,7 +139,7 @@ footer:
       # url:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      # url:
+       url: "https://www.instagram.com/97___baek/"
 
 
 # Reading Files
