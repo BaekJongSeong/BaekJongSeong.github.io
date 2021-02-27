@@ -4,8 +4,7 @@ title: "topic 별 실시간 issue 집계 후 나열 웹페이지 제작 프로�
 comments: true
 image: assets/images/2021-02-27-naver_news.png
 ---
-from google.colab import drive
-drive.mount('/content/drive')
+
 This is a project to create a web page 
 
 that lists current real-time issues (topics) 
@@ -45,8 +44,10 @@ about things happening in Korea by ranking.
 
 
 먼저 마운트를 해주고
+'''
 from google.colab import drive
 drive.mount('/content/drive')
+'''
 
 ## 1번 카테고리 -정치/사회를 먼저 구성해보면
 
