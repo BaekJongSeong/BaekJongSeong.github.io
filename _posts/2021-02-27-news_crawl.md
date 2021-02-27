@@ -39,6 +39,7 @@ about things happening in Korea by ranking.
 
 '''
 from google.colab import drive
+
 drive.mount('/content/drive')
 '''
 
@@ -52,14 +53,21 @@ soup에서 해당 기사들 중에서 rank가 메겨진 부분들에
 
 '''
 import os
+
 os.chdir(r"/content/drive/MyDrive/Naver/")
+
 import re
+
 import requests
+
 import pandas as pd
+
 import time
+
 from bs4 import BeautifulSoup
 
 press_ID = {"연합뉴스": "001","JTBC" : "437", "KBS" : "056"}
+
 def get_ranking_news(date):
   for press in press_ID:
     url = "https://news.naver.com/main/ranking/office.nhn?officeId=" + press_ID[press] + "&date=" + str(date)
@@ -68,14 +76,12 @@ def get_ranking_news(date):
     soup = BeautifulSoup(resp.text , "html.parser")
     ranking_box = soup.find_all(class_= "rankingnews_box_inner")
     I = []
-    
 #이때 rankingnews_box_inner라는 태그안에서 오늘날짜로의
 #rank가 매겨진 모든 기사들이 순위로 나오게 되는데 이것을 기준으로
 #list_content를 하나씩 list에 담아서 url_list 변수로 받고
 #(find_all과 find는 html 태그에 대해서만 작동하기 떄문에 조심)
 #get_text()는 해당 태그에서 다른 주소들말고 제대로 된 문자열만 반환해주기 때문에
 #title과 view / comment, rank 값을 받아서 넘겨준다
-
     for ranking_type in range(2):   #그 안에 찾고싶은 class 갯수가 밑에처럼 두개가 있어서 2구나~!
       ranking = ranking_box[ranking_type].find_all(class_ = "list_ranking_num")
       url_list = ranking_box[ranking_type].find_all(class_ = "list_content")
@@ -104,7 +110,9 @@ def get_ranking_news(date):
     df = pd.DataFrame(I)
     title = press + "/" + str(date) + "_" + press + "_ranking_news.csv"
     df.to_csv(title,sep=",", index = False, encoding = "utf-8-sig")
+    
   print("=======================================")
+  
 get_ranking_news(20210226)
 '''
 
@@ -122,9 +130,13 @@ html 문서 안에 태그되어있다.
 
 '''
 import re
+
 import requests
+
 import pandas as pd
+
 import time
+
 from bs4 import BeautifulSoup
 
 url = "https://entertain.naver.com/ranking#type=hit_total&date=2021-02-26"
@@ -133,7 +145,6 @@ resp = requests.get(url, headers = headers)
 soup = BeautifulSoup(resp.text, "html.parser")
 ranking_box = soup.find_all(class_= "rank_lst")
 date = "20210226"
-
 I=[]
 url_rank = ranking_box[0].find_all(class_ = "blind")
 a = ranking_box[0].find_all("a")
@@ -166,22 +177,26 @@ tuple로 감싸서 dictionary 형태로 뽑아내기
 
 '''
 %cd /content/drive/MyDrive/Naver/
+
 import re
+
 import requests
+
 import pandas as pd
+
 import time
+
 from bs4 import BeautifulSoup
+
 url = "https://sports.news.naver.com/ranking/index.nhn"
 headers = {"User-Agent": "Mozilla/5.0(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"}
 resp = requests.get(url, headers = headers) 
 soup = BeautifulSoup(resp.text, "html.parser")
 #date = '20210226' 안에 date 있어서 이거 없어도 돼
-
 url_list=soup.find_all("script")
 url_list=re.split("{",url_list[-5].text)
 url_list2=[]
 I=[]
-
 for item in url_list:
   if "\"section\":" in item and "subSection" in item:
     url_list2.append(item.split("}")[0])
@@ -208,7 +223,6 @@ for rank in range(20):
   d['subContent'] = url_list2[rank]['subContent']
   d['totalCount'] = url_list2[rank]['totalCount']
   I.append(d)
-
 for news in I:
       resp = requests.get("https://sports.news.naver.com/news.nhn?" + news['URL'], headers = headers)
       soup = BeautifulSoup(resp.text,"html.parser")
@@ -216,7 +230,10 @@ for news in I:
       news['Content'] = re.sub('[\{\}\[\]\/?\(\);:|*~`!^\-_+<>▶▽♡◀ㅡ@\#$&\\\=\'\"ⓒ(\n)(\t)]', '', contents)
     
 df = pd.DataFrame(I)
+
 title = "Sport/" + str(date) + "_" + "sport" + "_ranking_news.csv"
+
 df.to_csv(title,sep=",", index = False, encoding = "utf-8-sig")
+
 print("=======================================")
 '''
