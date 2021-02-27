@@ -90,7 +90,7 @@ analytics:
   google:
     tracking_id          : "G-1W4NTKQ89J"
 
-    anonymize_ip         : # true, false (default)
+    anonymize_ip         : false # true, false (default)
 
 
 # Site Author
