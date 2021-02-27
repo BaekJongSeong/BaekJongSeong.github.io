@@ -44,7 +44,7 @@ about things happening in Korea by ranking.
 
 
 먼저 마운트를 해주고
-'''
+'''python
 from google.colab import drive
 drive.mount('/content/drive')
 '''
