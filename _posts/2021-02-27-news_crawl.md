@@ -4,7 +4,8 @@ title: "topic 별 실시간 issue 집계 후 나열 웹페이지 제작 프로�
 comments: true
 image: assets/images/2021-02-27-naver_news.png
 ---
-
+from google.colab import drive
+drive.mount('/content/drive')
 This is a project to create a web page 
 
 that lists current real-time issues (topics) 
