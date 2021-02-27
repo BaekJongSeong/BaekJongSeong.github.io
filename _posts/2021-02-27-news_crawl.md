@@ -44,10 +44,8 @@ about things happening in Korea by ranking.
 
 
 먼저 마운트를 해주고
-'''python
-from google.colab import drive
 drive.mount('/content/drive')
-'''
+
 
 ## 1번 카테고리 -정치/사회를 먼저 구성해보면
 
@@ -63,19 +61,13 @@ soup에서 해당 기사들 중에서 rank가 메겨진 부분들에
 
 ### 우리는 랭킹 뉴스에 대한 정보를 원하기 때문!
 
-'''
-import os
-
-os.chdir(r"/content/drive/MyDrive/Naver/")
-
+'''python
+#import os
+#os.chdir(r"/content/drive/MyDrive/Naver/")
 import re
-
 import requests
-
 import pandas as pd
-
 import time
-
 from bs4 import BeautifulSoup
 
 press_ID = {"연합뉴스": "001","JTBC" : "437", "KBS" : "056"}
@@ -161,15 +153,11 @@ html 문서 안에 태그되어있다.
 
 해당 태그는 rank_lst이다.
 
-'''
+'''python
 import re
-
 import requests
-
 import pandas as pd
-
 import time
-
 from bs4 import BeautifulSoup
 
 url = "https://entertain.naver.com/ranking#type=hit_total&date=2021-02-26"
@@ -200,9 +188,8 @@ rank_lst로 가져왔으면 이 내용들에서
 
 이때 스포츠 카테고리는 
 
-'''
-<script type="text/javascript"></script>
-'''
+### <script type="text/javascript"></script>
+
 
 태그로 내용을 감쌈
 
@@ -215,16 +202,11 @@ script안에서 랭킹 내용이 dictionary로 되어있으므로
 tuple로 감싸서 dictionary 형태로 뽑아내기
 
 '''
-%cd /content/drive/MyDrive/Naver/
-
+#%cd /content/drive/MyDrive/Naver/
 import re
-
 import requests
-
 import pandas as pd
-
 import time
-
 from bs4 import BeautifulSoup
 
 url = "https://sports.news.naver.com/ranking/index.nhn"
