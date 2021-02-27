@@ -36,10 +36,12 @@ about things happening in Korea by ranking.
   + 핵심어 노출(검색어 순위와는 다른 개념!!!)
 
 먼저 마운트를 해주고
+
 '''
 from google.colab import drive
 drive.mount('/content/drive')
 '''
+
 ## 1번 카테고리 -정치/사회를 먼저 구성해보면
 "네이버 뉴스" 페이지에서 언론사별 뉴스를 탐색했을때
 나오는 id 번호들을 고려해서 press_ID를 작성해주고
@@ -66,16 +68,14 @@ def get_ranking_news(date):
     soup = BeautifulSoup(resp.text , "html.parser")
     ranking_box = soup.find_all(class_= "rankingnews_box_inner")
     I = []
-'''
+    
+#이때 rankingnews_box_inner라는 태그안에서 오늘날짜로의
+#rank가 매겨진 모든 기사들이 순위로 나오게 되는데 이것을 기준으로
+#list_content를 하나씩 list에 담아서 url_list 변수로 받고
+#(find_all과 find는 html 태그에 대해서만 작동하기 떄문에 조심)
+#get_text()는 해당 태그에서 다른 주소들말고 제대로 된 문자열만 반환해주기 때문에
+#title과 view / comment, rank 값을 받아서 넘겨준다
 
-이때 rankingnews_box_inner라는 태그안에서 오늘날짜로의
-rank가 매겨진 모든 기사들이 순위로 나오게 되는데 이것을 기준으로
-list_content를 하나씩 list에 담아서 url_list 변수로 받고
-(find_all과 find는 html 태그에 대해서만 작동하기 떄문에 조심)
-get_text()는 해당 태그에서 다른 주소들말고 제대로 된 문자열만 반환해주기 때문에
-title과 view / comment, rank 값을 받아서 넘겨준다
-
-'''
     for ranking_type in range(2):   #그 안에 찾고싶은 class 갯수가 밑에처럼 두개가 있어서 2구나~!
       ranking = ranking_box[ranking_type].find_all(class_ = "list_ranking_num")
       url_list = ranking_box[ranking_type].find_all(class_ = "list_content")
@@ -91,20 +91,16 @@ title과 view / comment, rank 값을 받아서 넘겨준다
         elif (ranking_type == 1):
           d['Comment'] = url_list[rank].find(class_="list_comment nclicks('RBP.dcmtnwscmt')").get_text()
         I.append(d)
-'''
-후에 받아온 url 값에 들어있는 oid와 aid 값을 토대로
-해당 게시물에 들어가서 contents를 받아오고
-(이때 get_text를 통해서 위처럼 받아오는데 해당 게시물에
-코드 문자들을 ex)▶▽♡◀ 전부 치환하고 가져오기 위해서 re.sub사용)
-데이터프레임으로 묶어서 csv 파일로 저장하면 된다.
-
-'''
+#후에 받아온 url 값에 들어있는 oid와 aid 값을 토대로
+#해당 게시물에 들어가서 contents를 받아오고
+#(이때 get_text를 통해서 위처럼 받아오는데 해당 게시물에
+#코드 문자들을 ex)▶▽♡◀ 전부 치환하고 가져오기 위해서 re.sub사용)
+#데이터프레임으로 묶어서 csv 파일로 저장하면 된다.
     for news in I:
       resp = requests.get("https://news.naver.com" + news['URL'], headers = headers)
       soup = BeautifulSoup(resp.text,"html.parser")
       contents = soup.find(id="articleBodyContents").get_text()
-      news['Content'] = re.sub('[\{\}\[\]\/?\(\);:|*~`!^\-_+<>▶▽♡◀ㅡ@\#$&\\\=\'\"ⓒ(\n)(\t)]', '', contents)
-    
+      news['Content'] = re.sub('[\{\}\[\]\/?\(\);:|*~`!^\-_+<>▶▽♡◀ㅡ@\#$&\\\=\'\"ⓒ(\n)(\t)]', '', contents) 
     df = pd.DataFrame(I)
     title = press + "/" + str(date) + "_" + press + "_ranking_news.csv"
     df.to_csv(title,sep=",", index = False, encoding = "utf-8-sig")
@@ -157,9 +153,11 @@ rank_lst로 가져왔으면 이 내용들에서
 
 ## 그리고 마지막 스포츠 카테고리 역시 같은 방식으로 진행
 이때 스포츠 카테고리는 
+
 '''
 <script type="text/javascript"></script>
 '''
+
 태그로 내용을 감쌈
 즉, 랭킹뉴스에 관한 정보가 자바스크립트형태로 감싸져 있어서
 해당 내용을 추출하려면 먼저 script를 고르고
