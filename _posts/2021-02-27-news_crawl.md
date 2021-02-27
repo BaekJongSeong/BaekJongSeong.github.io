@@ -44,7 +44,8 @@ about things happening in Korea by ranking.
 
 
 먼저 마운트를 해주고
-drive.mount('/content/drive')
+
+
 
 
 ## 1번 카테고리 -정치/사회를 먼저 구성해보면
