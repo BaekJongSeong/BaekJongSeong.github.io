@@ -2,7 +2,7 @@
 layout: post
 title: "topic 별 실시간 issue 집계 후 나열 웹페이지 제작 프로젝트"
 comments: true
-image: ![2021-02-27-naver_news](https://user-images.githubusercontent.com/79182947/109409376-8289dc80-79d5-11eb-9d18-00db502856c8.png)
+image: BaekJongSeong.github.io/assets/images/2021-02-27-naver_news.png
 ---
 
 This is a project to create a web page 
